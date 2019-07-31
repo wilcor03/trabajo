@@ -83,7 +83,7 @@ class RegisterController extends Controller
     }
 
     public function register(Request $r){      
-        
+        dd($r->all());
         if($r->has('social_red')){          
           $emailValidation = ['required', 'string', 'email', 'max:100'];
         } else {          
