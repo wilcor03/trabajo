@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Resources\CityResource;
 use Illuminate\Support\Arr;
 
+use Illuminate\Support\Facades\Mail;
+
 use App\City;
 use App\Sector;
 use App\Departament;
@@ -16,7 +18,15 @@ use Mailgun\Mailgun;
 class SettingController extends Controller
 {
   public function sendEmail(){
-    
+    $data = [
+      'title' => 'hola mundisimo',
+      'content' => 'lo que sea'
+    ];
+
+    Mail::send('emails.test', $data, function($m){
+      $m->to('wilcor03@gmail.com', 'wilmer C.')->subject('un asunto test');
+    });
+    dd('llego');
   }
 
   public function getCitiesWithDeps(){

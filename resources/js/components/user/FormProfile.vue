@@ -196,7 +196,7 @@ export default {
         email:'',
         city_id:'',
         celPhone:'',
-        birthDay: new Date().toISOString().substr(0, 10),
+        birthDay: '2005-12-31',//new Date().toISOString().substr(0, 10),
         description: ''
       }      
     }),
