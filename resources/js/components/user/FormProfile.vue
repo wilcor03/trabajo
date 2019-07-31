@@ -72,8 +72,9 @@
                 ref="picker"
                 locale="es-es"
                 v-model="user.birthDay"
-                :max="new Date().toISOString().substr(0, 10)"
+                max="2005-12-31"
                 min="1950-01-01"
+                type="date"
               >
               <v-spacer></v-spacer>
               <v-btn flat color="primary" @click="modal = false">Cerrar</v-btn>
@@ -210,6 +211,9 @@ export default {
     watch:{
       Profile(val){
         this.user = Object.assign({}, val);
+      },
+      modal (val) {
+        val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
       }
     },
     methods:

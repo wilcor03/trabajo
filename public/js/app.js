@@ -3404,6 +3404,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 var _createNamespacedHelp = Object(vuex__WEBPACK_IMPORTED_MODULE_0__["createNamespacedHelpers"])('ProfileStore'),
@@ -3465,6 +3466,13 @@ var _createNamespacedHelp = Object(vuex__WEBPACK_IMPORTED_MODULE_0__["createName
   watch: {
     Profile: function Profile(val) {
       this.user = Object.assign({}, val);
+    },
+    modal: function modal(val) {
+      var _this = this;
+
+      val && setTimeout(function () {
+        return _this.$refs.picker.activePicker = 'YEAR';
+      });
     }
   },
   methods: _objectSpread({}, mapActions(['saveProfile', 'getProfile']), {
@@ -38201,8 +38209,9 @@ var render = function() {
                               ref: "picker",
                               attrs: {
                                 locale: "es-es",
-                                max: new Date().toISOString().substr(0, 10),
-                                min: "1950-01-01"
+                                max: "2005-12-31",
+                                min: "1950-01-01",
+                                type: "date"
                               },
                               model: {
                                 value: _vm.user.birthDay,
