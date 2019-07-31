@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { getHeaders } from './Auth';
-const basepath = 'https://empleo.dev/api/employee/studies'
+const basepath = '/api/employee/studies'
 
 export function storeStudy(study)
 {

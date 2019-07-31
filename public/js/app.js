@@ -89099,7 +89099,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Auth */ "./resources/js/services/Auth.js");
 
 
-var basepath = 'https://empleo.dev/api/employee/experience';
+var basepath = '/api/employee/experience';
 function storeExperience(experience) {
   return new Promise(function (resolve, reject) {
     var headers = Object(_Auth__WEBPACK_IMPORTED_MODULE_1__["getHeaders"])();
@@ -89277,7 +89277,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Auth */ "./resources/js/services/Auth.js");
 
 
-var basepath = 'https://empleo.dev/api/employee/studies';
+var basepath = '/api/employee/studies';
 function storeStudy(study) {
   return new Promise(function (resolve, reject) {
     var headers = Object(_Auth__WEBPACK_IMPORTED_MODULE_1__["getHeaders"])();
