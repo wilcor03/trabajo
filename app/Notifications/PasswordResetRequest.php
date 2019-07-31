@@ -37,12 +37,13 @@ class PasswordResetRequest extends Notification implements ShouldQueue
      public function toMail($notifiable)
      {
         //$url = url('/api/password/find/'.$this->token);
-        $url = url('/auth/reset-password/'.$this->token);
+        $url = url('/app/auth/reset-password/'.$this->token);
         //dd($url);
         return (new MailMessage)
-            ->line('You are receiving this email because we        received a password reset request for your account.')
-            ->action('Reset Password', url($url))
-            ->line('If you did not request a password reset, no further action is required.');
+            ->subject('Cambio Contraseña [Empleo - ConTabilizalo]')
+            ->line('Usted esta recibiendo este mensaje por que recibimos una solicitud para resetear su contraseña de su cuenta.')
+            ->action('Cambiar contraseña', url($url))
+            ->line('Si usted no solicito el cambio de su contraseña, omita este correo por favor!.');
     }
     /**
     * Get the array representation of the notification.

@@ -15,3 +15,11 @@ Route::post('/register', 'Auth\RegisterController@register');
 
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/send-email', 'SettingController@sendEmail');
+
+/*Route::get('test', function(){	
+	$user = App\User::find(1);
+	return 
+              new App\Notifications\PasswordResetRequest($user)
+          ;
+  //return (new App\Notifications\PasswordResetRequest(str_random(60)));
+});*/
