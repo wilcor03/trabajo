@@ -11,14 +11,18 @@ export default {
         if(this.facebookIsConnected){                
           this.getFacebookData().then(data => {
             this.sendingData(data);
-          })
+          }).finally(() => {
+            this.loading = false;
+          });
         }
       },
       onLogin() {
         if(!this.facebookIsConnected){                
           this.getFacebookData().then(data => {
             this.sendingData(data);
-          });
+          }).finally(() => {
+            this.loading = false;
+          });;
         }      
       },
       onLogout() {      

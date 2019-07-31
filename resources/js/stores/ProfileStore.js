@@ -24,7 +24,7 @@ const ProfileStore = {
             let theBirthDate = new Date().toISOString().substr(0, 10);            
             if(payload.birthDay != ''){                
                 theBirthDate = payload.birthDay;
-            }                        console.log('aja')
+            }                       
             
             state.Profile = {
                 'name': payload.name,   

@@ -88584,6 +88584,8 @@ __webpack_require__.r(__webpack_exports__);
       if (this.facebookIsConnected) {
         this.getFacebookData().then(function (data) {
           _this.sendingData(data);
+        }).finally(function () {
+          _this.loading = false;
         });
       }
     },
@@ -88593,7 +88595,10 @@ __webpack_require__.r(__webpack_exports__);
       if (!this.facebookIsConnected) {
         this.getFacebookData().then(function (data) {
           _this2.sendingData(data);
+        }).finally(function () {
+          _this2.loading = false;
         });
+        ;
       }
     },
     onLogout: function onLogout() {
@@ -89159,7 +89164,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Auth */ "./resources/js/services/Auth.js");
 
 
-var basepath = 'https://empleo.dev/api/employee';
+var basepath = '/api/employee';
 function getProfile() {
   return new Promise(function (resolver, reject) {
     var headers = Object(_Auth__WEBPACK_IMPORTED_MODULE_1__["getHeaders"])();
@@ -90172,7 +90177,6 @@ var ProfileStore = {
         theBirthDate = payload.birthDay;
       }
 
-      console.log('aja');
       state.Profile = {
         'name': payload.name,
         'email': payload.email,

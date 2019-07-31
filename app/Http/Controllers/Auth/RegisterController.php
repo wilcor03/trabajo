@@ -118,9 +118,9 @@ class RegisterController extends Controller
         //WHEN REGISTER IS DIRECTLY
 
         $user = new User;//::firstOrNew(['email' => request()->email]);
-        $user->name          = request()->name; 
-        $user->email         = request()->email;
-        $user->password      = bcrypt(request()->password);
+        $user->name          = $r->name; 
+        $user->email         = $r->email;
+        $user->password      = bcrypt($r->password);
         //$user->api_token     = Str::random(60);
         $user->profileType   = $r->profileType;
         if($user->save()){
