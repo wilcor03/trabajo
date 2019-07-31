@@ -14,9 +14,10 @@ class PasswordResetRequest extends Notification implements ShouldQueue
     *
     * @return void
     */
-    public function __construct($token)
+    public function __construct($token, $name)
     {
-        $this->token = $token;
+        $this->token    = $token;
+        $this->name     = $name; 
     }
     /**
     * Get the notification's delivery channels.
@@ -40,6 +41,7 @@ class PasswordResetRequest extends Notification implements ShouldQueue
         $url = url('/app/auth/reset-password/'.$this->token);
         //dd($url);
         return (new MailMessage)
+            ->greeting('Hola! '.strtoupper($this->name))
             ->subject('Cambio Contraseña [Empleo - ConTabilizalo]')
             ->line('Usted esta recibiendo este mensaje por que recibimos una solicitud para resetear su contraseña de su cuenta.')
             ->action('Cambiar contraseña', url($url))
