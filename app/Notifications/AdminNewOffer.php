@@ -49,7 +49,8 @@ class AdminNewOffer extends Notification
                     ->greeting('Hola Admin!')                  
                     ->subject('Nueva oferta - [ Empleo - ConTabilizalo ]')
                     ->line('Nueva oferta: '.$this->offer->vacancyName)
-                    ->line('Empresa: '.$this->offer->user->employerProfile->socialReason);
+                    ->line('Empresa: '.$this->offer->user->employerProfile->socialReason)
+                    ->line('Descripción: '.$this->offer->description);
     }
 
     /*public function toSlack($notifiable)
