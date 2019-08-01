@@ -145,5 +145,9 @@ export const routes = [
                 ]
             }
         ]   
+    },
+    {
+        path:'*',
+        redirect:'/app/auth/login'
     }
 ];

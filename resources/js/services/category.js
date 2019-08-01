@@ -2,6 +2,18 @@ import Axios from 'axios';
 const basepath = '/api/employee/categories';
 import { getHeaders } from './Auth';
 
+export function all(){//all categories in table categories
+    return new Promise((resolve, reject)=>{
+        const headers = getHeaders();
+        const url = '/api/categories/all';
+        Axios.get(`${url}`, headers).then(res => {
+            resolve(res.data)
+        }).catch(err =>{
+            reject(err)
+        });
+    })
+}
+
 export function list(){
     return new Promise((resolve, reject)=>{
         const headers = getHeaders();

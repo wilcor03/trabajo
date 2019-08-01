@@ -1,9 +1,10 @@
-import { list, attach, myCategories } from '../services/category';
+import { list, attach, myCategories, all } from '../services/category';
 const CategoryStore = {
     namespaced:true,
     state:{
         categories: [],
-        loading:false
+        loading:false,
+        allCategories:[]
     },
     getters:{
         selectedCats(state){                                
@@ -20,16 +21,24 @@ const CategoryStore = {
         },
         setLoading(state, payload){
             state.loading = payload
+        },
+        setAllCategories(state, payload){
+            state.allCategories = payload;
         }     
     },
     actions:{
-        list({commit}){
+        list({commit}){//with the category user selected
             commit('setLoading', true);
             list().then(data => {
                 commit('setCategories', data)
             }).finally(() => {
                 commit('setLoading', false);
             })
+        },
+        all({commit}){
+          all().then(data =>{
+              commit('setAllCategories', data);
+          })  
         },
         attach({commit, state}, payload){
             commit('setLoading', true)

@@ -13,9 +13,11 @@ class PasswordResetSuccess extends Notification implements ShouldQueue
     *
     * @return void
     */
-    public function __construct()
+    protected $user;
+
+    public function __construct($user)
     {
-        //
+      $this->user = $user;
     }
     /**
     * Get the notification's delivery channels.
@@ -35,10 +37,12 @@ class PasswordResetSuccess extends Notification implements ShouldQueue
     */
     public function toMail($notifiable)
     {
+      $url = '/app/auth/login';
       return (new MailMessage)
-          ->line('You are changed your password succeful.')
-          ->line('If you did change password, no further action is required.')
-          ->line('If you did not change password, protect your account.');
+          ->greeting('Hola! '.strtoupper($this->user->name))
+          ->line('Ha cambiado su contraseña con exito!.')
+          ->line('Ya puede ingresar con su nueva contraseña.')
+          ->action('Ingresar', url($url));
     }
 /**
      * Get the array representation of the notification.

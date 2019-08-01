@@ -12,7 +12,7 @@ use App\User;
 
 class EmployeeCategoryController extends Controller
 {
-    public function list(){
+    public function list(){ 
     	$user = auth()->user();
     	$catList = Category::get(['id', 'name']);    	
     	$catListSelected = collect($user->categories);

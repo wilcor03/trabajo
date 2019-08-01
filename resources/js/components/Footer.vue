@@ -41,6 +41,7 @@
       </v-card-text>
 
       <v-card-text class="white--text pt-0">
+        <p>Dudas, preguntas y/o sugerencias al correo: <strong><a href="mailto:contabilizalo.com@gmail.com" target="_blank" class="yellow--text">contabilizalo.com@gmail.com</a></strong></p>
         <a style="color:white;" href="https://contabilizalo.com" target="_blank">
         <strong>ConTabilizalo.com</strong>
         </a> es una comunidad contable y pone a disposición del público ésta herramienta, que permitirá a empresas y trabajadores interactuar de manera eficiente. Aquí podrá publicar ofertas de trabajo y también podrá encontrar ofertas de empleo que se acomoden a su necesidad!

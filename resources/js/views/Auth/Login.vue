@@ -49,7 +49,7 @@
 
               </v-card-text>
               <v-card-actions>
-                <v-btn type="submit" color="info" block
+                <v-btn type="submit" :loading="loading" :disabled="loading" color="info" block
                 
                 >Ingresar <v-icon right>mdi-login-variant</v-icon> </v-btn>                                                
               </v-card-actions>
@@ -59,8 +59,7 @@
             <br>
             <router-link :to="{name:'auth.link-reset-pass'}">Olvido su contraseña?</router-link> 
             <br>
-            <router-link :to="{name:'auth.register'}">Crear una cuenta?</router-link> 
-            
+            <router-link :to="{name:'auth.register'}">Crear una cuenta?</router-link>             
           </v-flex>
         </v-layout>  
         <v-layout>
@@ -76,7 +75,7 @@
             logoutLabel= "Salir de Facebook?"
             >
           </facebook-login>
-          <v-btn :loading="loading" v-if="facebookIsConnected" @click="loginWithButtonFacebook" dark color="indigo">
+          <v-btn :loading="loading" :disabled="loading" v-if="facebookIsConnected" @click="loginWithButtonFacebook" dark color="indigo">
             <v-icon left>mdi-facebook</v-icon>
             Ingresar con Facebook
           </v-btn>
@@ -120,7 +119,8 @@ export default {
   methods:{    
     ...mapActions('AuthStore', ['login', 'register', 'getFacebookData']),
     submit(){
-      if (this.$refs.form.validate()) {        
+      if (this.$refs.form.validate()) {    
+        this.loading = true;    
         this.snackbar = true;
         this.login(this.user).then(localUser => {
           if(localUser){
@@ -135,6 +135,8 @@ export default {
           setTimeout(() => {
             this.credentialsInvalid = false;
           }, 4000);          
+        }).finally(() => {
+          this.loading = false;
         })
       }      
     }

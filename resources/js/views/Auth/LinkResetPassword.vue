@@ -11,12 +11,8 @@
       color="cyan"
       dark
     >
-      <v-toolbar-side-icon></v-toolbar-side-icon>
-      <v-toolbar-title>Resetear contraseña</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>home</v-icon>
-      </v-btn>
+      <v-toolbar-side-icon><v-icon>mdi-lock-reset</v-icon></v-toolbar-side-icon>
+      <v-toolbar-title>Resetear contraseña</v-toolbar-title>      
     </v-toolbar>
 
     <v-card>
@@ -37,7 +33,7 @@
 
               </v-card-text>
               <v-card-actions>
-                <v-btn type="submit" color="info" block>enviar</v-btn>
+                <v-btn :loading="loading" :disabled="loading" type="submit" color="info" block>enviar</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -69,6 +65,7 @@ export default {
     data:() => ({
         valid:true,
         email:'',
+        loading:false,
         success:false,
         emailRules: [
           v => !!v || 'Campo requerido!',
@@ -78,14 +75,18 @@ export default {
     }),
     methods:{
         submit(){  
+          this.loading = true;                    
           if (!this.$refs.form.validate()) {      
             this.snackbar = true
+            this.loading = false;
             return false;
           }  
           this.$store.dispatch('AuthStore/getLinkPassword', this.email).then(res => {
             if(res.status == 200){
               this.success = true;
             }
+          }).finally(() => {
+            this.loading = false;
           });
         }
     }

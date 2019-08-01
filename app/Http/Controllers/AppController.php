@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+
 use Illuminate\Http\Request;
 
 class AppController extends Controller
@@ -29,5 +31,9 @@ class AppController extends Controller
     	if($user->save()){
     		return response()->json($user, 200);
     	}
+    }
+
+    public function allCategories(){
+      return Category::all();
     }
 }

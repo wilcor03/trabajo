@@ -20,7 +20,9 @@ return [
         'allow_credentials' => false,
 
         'allow_origins' => [
-            '*',
+            'https://contabilizalo.com',
+
+            'https://*.contabilizalo.com',
         ],
 
         'allow_methods' => [

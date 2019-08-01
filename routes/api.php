@@ -17,14 +17,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::post('reset', 'PasswordResetController@reset');    
 });
 
-Route::group([    
+/*Route::group([    
     'namespace' => 'Auth',    
     'middleware' => 'api',        
 	], function () {    
     Route::post('social-register', 'RegisterController@socialRegister');
-});
+});*/
 	
+
 Route::group(['middleware' => 'auth:api'], function(){
+
+	Route::get('categories/all', 'AppController@allCategories');
 
 	Route::group(['namespace' => 'Employee', 'prefix' => 'employee', 'middleware' => 'is-employee'], function(){
 		###### PROFILE #########################

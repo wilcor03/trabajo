@@ -2102,6 +2102,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
     goOutSide: function goOutSide(url) {
@@ -2190,9 +2191,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   created: function created() {
-    this.list();
+    //this.list();   
+    this.all();
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('CategoryStore', ['list']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('EmployerOfferStore', ['attachCategory']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('CategoryStore', ['all']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('EmployerOfferStore', ['attachCategory']), {
     submitForm: function submitForm() {
       var _this = this;
 
@@ -2225,7 +2227,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return ids;
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('CategoryStore', ['categories']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('EmployerOfferStore', ['Offer', 'saved', 'step']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('CategoryStore', ['allCategories']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('EmployerOfferStore', ['Offer', 'saved', 'step']), {
     hasErrorSelectedItems: function hasErrorSelectedItems() {
       if (!this.selectedItems.length) {
         return true; //tiene error
@@ -3586,7 +3588,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    goBlog: function goBlog() {
+      window.open('https://contabilizalo.com');
+    }
+  }
+});
 
 /***/ }),
 
@@ -3662,16 +3670,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       valid: true,
       email: '',
+      loading: false,
       success: false,
       emailRules: [function (v) {
         return !!v || 'Campo requerido!';
@@ -3686,8 +3691,11 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this = this;
 
+      this.loading = true;
+
       if (!this.$refs.form.validate()) {
         this.snackbar = true;
+        this.loading = false;
         return false;
       }
 
@@ -3695,6 +3703,8 @@ __webpack_require__.r(__webpack_exports__);
         if (res.status == 200) {
           _this.success = true;
         }
+      }).finally(function () {
+        _this.loading = false;
       });
     }
   }
@@ -3720,7 +3730,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -3843,6 +3852,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       if (this.$refs.form.validate()) {
+        this.loading = true;
         this.snackbar = true;
         this.login(this.user).then(function (localUser) {
           if (localUser) {
@@ -3862,6 +3872,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           setTimeout(function () {
             _this.credentialsInvalid = false;
           }, 4000);
+        }).finally(function () {
+          _this.loading = false;
         });
       }
     }
@@ -4284,8 +4296,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _this = undefined;
-
+//
+//
 //
 //
 //
@@ -4383,8 +4395,10 @@ var _this = undefined;
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      valid: true,
+      loading: false,
       user: {
-        password: null,
+        password: '',
         password_confirm: null
       },
       showPass: false,
@@ -4401,31 +4415,39 @@ var _this = undefined;
         return !!v || 'Campo requerido!';
       }, function (v) {
         return v && v.length >= 8 || 'Inserte por lo menos 8 caractéres!';
-      }, function (v) {
-        return v && _this.user.password == v || 'Los campos no coinciden!';
       }]
     };
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this = this;
 
     var token = this.$route.params.token;
     axios.get('/api/password/find/' + token).then(function (res) {
       if (res.status == 200) {
-        _this2.showForm = true;
+        _this.showForm = true;
       }
 
-      _this2.info = res.data;
+      _this.info = res.data;
     }).catch(function (err) {
-      _this2.showError = true;
+      _this.showError = true;
     });
   },
   methods: {
     submit: function submit() {
-      var _this3 = this;
+      var _this2 = this;
 
-      if (!this.info) {
+      this.loading = true;
+
+      if (this.user.password != this.user.password_confirm) {
+        alert('Introduzca dos contraseñas iguales!');
+        this.loading = false;
         return;
+      }
+
+      if (!this.$refs.form.validate()) {
+        this.loading = false;
+        this.snackbar = true;
+        return false;
       }
 
       var data = {
@@ -4435,12 +4457,14 @@ var _this = undefined;
         token: this.info.token
       };
       axios.post('/api/password/reset', data).then(function (res) {
-        _this3.redirect = true;
+        _this2.redirect = true;
         setTimeout(function () {
-          _this3.$router.push({
+          _this2.$router.push({
             name: 'auth.login'
           });
         }, 3000);
+      }).finally(function () {
+        _this2.loading = false;
       });
     }
   }
@@ -36717,6 +36741,23 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("v-card-text", { staticClass: "white--text pt-0" }, [
+            _c("p", [
+              _vm._v("Dudas, preguntas y/o sugerencias al correo: "),
+              _c("strong", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "yellow--text",
+                    attrs: {
+                      href: "mailto:contabilizalo.com@gmail.com",
+                      target: "_blank"
+                    }
+                  },
+                  [_vm._v("contabilizalo.com@gmail.com")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
             _c(
               "a",
               {
@@ -36821,7 +36862,7 @@ var render = function() {
                       [
                         _c("v-select", {
                           attrs: {
-                            items: _vm.categories,
+                            items: _vm.allCategories,
                             attach: "",
                             chips: "",
                             label: "Seleccione una categoría de su oferta",
@@ -38565,7 +38606,7 @@ var render = function() {
             [
               _c(
                 "v-btn",
-                { attrs: { flat: "" } },
+                { attrs: { flat: "" }, on: { click: _vm.goBlog } },
                 [
                   _c("v-icon", { attrs: { left: "" } }, [
                     _vm._v("mdi-arrow-left-circle-outline")
@@ -38668,18 +38709,13 @@ var render = function() {
                     "v-toolbar",
                     { attrs: { color: "cyan", dark: "" } },
                     [
-                      _c("v-toolbar-side-icon"),
-                      _vm._v(" "),
-                      _c("v-toolbar-title", [_vm._v("Resetear contraseña")]),
-                      _vm._v(" "),
-                      _c("v-spacer"),
-                      _vm._v(" "),
                       _c(
-                        "v-btn",
-                        { attrs: { icon: "" } },
-                        [_c("v-icon", [_vm._v("home")])],
+                        "v-toolbar-side-icon",
+                        [_c("v-icon", [_vm._v("mdi-lock-reset")])],
                         1
-                      )
+                      ),
+                      _vm._v(" "),
+                      _c("v-toolbar-title", [_vm._v("Resetear contraseña")])
                     ],
                     1
                   ),
@@ -38732,6 +38768,8 @@ var render = function() {
                                                 "v-btn",
                                                 {
                                                   attrs: {
+                                                    loading: _vm.loading,
+                                                    disabled: _vm.loading,
                                                     type: "submit",
                                                     color: "info",
                                                     block: ""
@@ -38981,6 +39019,8 @@ var render = function() {
                                           {
                                             attrs: {
                                               type: "submit",
+                                              loading: _vm.loading,
+                                              disabled: _vm.loading,
                                               color: "info",
                                               block: ""
                                             }
@@ -39064,6 +39104,7 @@ var render = function() {
                                   {
                                     attrs: {
                                       loading: _vm.loading,
+                                      disabled: _vm.loading,
                                       dark: "",
                                       color: "indigo"
                                     },
@@ -39975,235 +40016,284 @@ var render = function() {
     "div",
     { attrs: { id: "reset-password" } },
     [
-      _c("v-container", [
-        _c(
-          "div",
-          {
-            staticClass: "grey lighten-3",
-            staticStyle: { "max-width": "400px", margin: "auto" },
-            attrs: { id: "e3" }
-          },
-          [
-            _c(
-              "v-toolbar",
-              { attrs: { color: "cyan", dark: "" } },
-              [
-                _c("v-toolbar-side-icon"),
-                _vm._v(" "),
-                _c("v-toolbar-title", [_vm._v("Cambio de contraseña")]),
-                _vm._v(" "),
-                _c("v-spacer"),
-                _vm._v(" "),
-                _c(
-                  "v-btn",
-                  { attrs: { icon: "" } },
-                  [_c("v-icon", [_vm._v("home")])],
-                  1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "v-card",
-              [
-                _c(
-                  "v-container",
-                  { attrs: { fluid: "", "grid-list-lg": "" } },
-                  [
-                    _vm.showForm && !_vm.redirect
-                      ? _c(
-                          "v-layout",
-                          { attrs: { row: "", wrap: "" } },
-                          [
-                            _c(
-                              "v-flex",
-                              { attrs: { xs12: "" } },
-                              [
-                                _c(
-                                  "v-card",
-                                  [
-                                    _c(
-                                      "v-card-title",
-                                      { attrs: { "primary-title": "" } },
-                                      [
-                                        _vm._v(
-                                          "\n                    Cambiar contraseña\n                "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-card-text",
-                                      { ref: "form" },
-                                      [
-                                        _c("v-text-field", {
-                                          attrs: {
-                                            "append-icon": _vm.showPass
-                                              ? "visibility"
-                                              : "visibility_off",
-                                            type: _vm.showPass
-                                              ? "text"
-                                              : "password",
-                                            name: "input-10-1",
-                                            label: "Nueva contraseña",
-                                            hint: "Al menos 8 caracteres",
-                                            rules: _vm.passwordRules
-                                          },
-                                          on: {
-                                            "click:append": function($event) {
-                                              _vm.showPass = !_vm.showPass
-                                            }
-                                          },
-                                          model: {
-                                            value: _vm.user.password,
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                _vm.user,
-                                                "password",
-                                                $$v
+      _c(
+        "v-container",
+        [
+          _c(
+            "v-form",
+            {
+              ref: "form",
+              attrs: { "lazy-validation": "" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.submit($event)
+                }
+              },
+              model: {
+                value: _vm.valid,
+                callback: function($$v) {
+                  _vm.valid = $$v
+                },
+                expression: "valid"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "grey lighten-3",
+                  staticStyle: { "max-width": "400px", margin: "auto" },
+                  attrs: { id: "e3" }
+                },
+                [
+                  _c(
+                    "v-toolbar",
+                    { attrs: { color: "cyan", dark: "" } },
+                    [
+                      _c(
+                        "v-toolbar-side-icon",
+                        [_c("v-icon", [_vm._v("mdi-lock-reset")])],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-toolbar-title", [_vm._v("Cambio de contraseña")])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card",
+                    [
+                      _c(
+                        "v-container",
+                        { attrs: { fluid: "", "grid-list-lg": "" } },
+                        [
+                          _vm.showForm && !_vm.redirect
+                            ? _c(
+                                "v-layout",
+                                { attrs: { row: "", wrap: "" } },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "" } },
+                                    [
+                                      _c(
+                                        "v-card",
+                                        [
+                                          _c(
+                                            "v-card-title",
+                                            { attrs: { "primary-title": "" } },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "grey--text" },
+                                                [
+                                                  _vm._v(
+                                                    "Introduzca dos valores iguales!"
+                                                  )
+                                                ]
                                               )
-                                            },
-                                            expression: "user.password"
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("v-text-field", {
-                                          attrs: {
-                                            "append-icon": _vm.showPass
-                                              ? "visibility"
-                                              : "visibility_off",
-                                            type: _vm.showPass
-                                              ? "text"
-                                              : "password",
-                                            name: "input-10-1",
-                                            label:
-                                              "Confirme la nueva contraseña",
-                                            hint: "Al menos 8 caracteres",
-                                            rules: _vm.passwordConfirmRules
-                                          },
-                                          on: {
-                                            "click:append": function($event) {
-                                              _vm.showPass = !_vm.showPass
-                                            }
-                                          },
-                                          model: {
-                                            value: _vm.user.password_confirm,
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                _vm.user,
-                                                "password_confirm",
-                                                $$v
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-card-text",
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  "append-icon": _vm.showPass
+                                                    ? "visibility"
+                                                    : "visibility_off",
+                                                  type: _vm.showPass
+                                                    ? "text"
+                                                    : "password",
+                                                  name: "input-10-1",
+                                                  label: "Nueva contraseña",
+                                                  hint: "Al menos 8 caracteres",
+                                                  rules: _vm.passwordRules
+                                                },
+                                                on: {
+                                                  "click:append": function(
+                                                    $event
+                                                  ) {
+                                                    _vm.showPass = !_vm.showPass
+                                                  }
+                                                },
+                                                model: {
+                                                  value: _vm.user.password,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.user,
+                                                      "password",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression: "user.password"
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  "append-icon": _vm.showPass
+                                                    ? "visibility"
+                                                    : "visibility_off",
+                                                  type: _vm.showPass
+                                                    ? "text"
+                                                    : "password",
+                                                  name: "input-10-1",
+                                                  label:
+                                                    "Confirme la nueva contraseña",
+                                                  hint: "Al menos 8 caracteres",
+                                                  rules:
+                                                    _vm.passwordConfirmRules
+                                                },
+                                                on: {
+                                                  "click:append": function(
+                                                    $event
+                                                  ) {
+                                                    _vm.showPass = !_vm.showPass
+                                                  }
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.user.password_confirm,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.user,
+                                                      "password_confirm",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "user.password_confirm"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-card-actions",
+                                            [
+                                              _c(
+                                                "v-btn",
+                                                {
+                                                  attrs: {
+                                                    type: "submit",
+                                                    loading: _vm.loading,
+                                                    disabled: _vm.loading,
+                                                    color: "info",
+                                                    block: ""
+                                                  }
+                                                },
+                                                [_vm._v("Cambiar contraseña")]
                                               )
-                                            },
-                                            expression: "user.password_confirm"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-card-actions",
-                                      [
-                                        _c(
-                                          "v-btn",
-                                          {
-                                            attrs: { color: "info", block: "" },
-                                            on: { click: _vm.submit }
-                                          },
-                                          [_vm._v("Cambiar contraseña")]
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.showError && !_vm.redirect
-                      ? _c(
-                          "v-layout",
-                          [
-                            _c(
-                              "v-flex",
-                              [
-                                _c(
-                                  "v-alert",
-                                  { attrs: { value: true, type: "error" } },
-                                  [
-                                    _vm._v(
-                                      "\n                        Error en el token o esta vencido, solicite uno nuevo!\n                    "
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-btn",
-                                  {
-                                    attrs: {
-                                      color: "info",
-                                      to: { name: "auth.link-reset-pass" }
-                                    }
-                                  },
-                                  [_vm._v("Solicitar nuevo token")]
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.redirect
-                      ? _c(
-                          "v-layout",
-                          [
-                            _c(
-                              "v-flex",
-                              [
-                                _c(
-                                  "v-alert",
-                                  { attrs: { value: true, type: "success" } },
-                                  [
-                                    _vm._v(
-                                      "\n                        Exito!\n                    "
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("br"),
-                                _vm._v(" "),
-                                _c("p", { staticClass: "text-md-center" }, [
-                                  _vm._v(
-                                    "\n                        Contraseña cambiada! ... Redireccionando...\n                    "
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
                                   )
-                                ])
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      : _vm._e()
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ])
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.showError && !_vm.redirect
+                            ? _c(
+                                "v-layout",
+                                [
+                                  _c(
+                                    "v-flex",
+                                    [
+                                      _c(
+                                        "v-alert",
+                                        {
+                                          attrs: { value: true, type: "error" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                Error en el token o esta vencido, solicite uno nuevo!\n                            "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: {
+                                            color: "info",
+                                            to: { name: "auth.link-reset-pass" }
+                                          }
+                                        },
+                                        [_vm._v("Solicitar nuevo token")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.redirect
+                            ? _c(
+                                "v-layout",
+                                [
+                                  _c(
+                                    "v-flex",
+                                    [
+                                      _c(
+                                        "v-alert",
+                                        {
+                                          attrs: {
+                                            value: true,
+                                            type: "success"
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                Exito!\n                            "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("br"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "p",
+                                        { staticClass: "text-md-center" },
+                                        [
+                                          _vm._v(
+                                            "\n                                Contraseña cambiada! ... Redireccionando...\n                            "
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ]
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -88788,6 +88878,9 @@ var routes = [{
       name: 'auth.reset-pass'
     }]
   }]
+}, {
+  path: '*',
+  redirect: '/app/auth/login'
 }];
 
 /***/ }),
@@ -89043,11 +89136,12 @@ function storeProfile(profile) {
 /*!*******************************************!*\
   !*** ./resources/js/services/category.js ***!
   \*******************************************/
-/*! exports provided: list, attach, myCategories */
+/*! exports provided: all, list, attach, myCategories */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "all", function() { return all; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "list", function() { return list; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "attach", function() { return attach; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "myCategories", function() { return myCategories; });
@@ -89057,6 +89151,18 @@ __webpack_require__.r(__webpack_exports__);
 
 var basepath = '/api/employee/categories';
 
+function all() {
+  //all categories in table categories
+  return new Promise(function (resolve, reject) {
+    var headers = Object(_Auth__WEBPACK_IMPORTED_MODULE_1__["getHeaders"])();
+    var url = '/api/categories/all';
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(url), headers).then(function (res) {
+      resolve(res.data);
+    }).catch(function (err) {
+      reject(err);
+    });
+  });
+}
 function list() {
   return new Promise(function (resolve, reject) {
     var headers = Object(_Auth__WEBPACK_IMPORTED_MODULE_1__["getHeaders"])();
@@ -89507,7 +89613,8 @@ var CategoryStore = {
   namespaced: true,
   state: {
     categories: [],
-    loading: false
+    loading: false,
+    allCategories: []
   },
   getters: {
     selectedCats: function selectedCats(state) {
@@ -89524,11 +89631,15 @@ var CategoryStore = {
     },
     setLoading: function setLoading(state, payload) {
       state.loading = payload;
+    },
+    setAllCategories: function setAllCategories(state, payload) {
+      state.allCategories = payload;
     }
   },
   actions: {
     list: function list(_ref) {
       var commit = _ref.commit;
+      //with the category user selected
       commit('setLoading', true);
 
       Object(_services_category__WEBPACK_IMPORTED_MODULE_0__["list"])().then(function (data) {
@@ -89537,9 +89648,16 @@ var CategoryStore = {
         commit('setLoading', false);
       });
     },
-    attach: function attach(_ref2, payload) {
-      var commit = _ref2.commit,
-          state = _ref2.state;
+    all: function all(_ref2) {
+      var commit = _ref2.commit;
+
+      Object(_services_category__WEBPACK_IMPORTED_MODULE_0__["all"])().then(function (data) {
+        commit('setAllCategories', data);
+      });
+    },
+    attach: function attach(_ref3, payload) {
+      var commit = _ref3.commit,
+          state = _ref3.state;
       commit('setLoading', true);
       return new Promise(function (resolve, reject) {
         Object(_services_category__WEBPACK_IMPORTED_MODULE_0__["attach"])(payload).then(function (data) {

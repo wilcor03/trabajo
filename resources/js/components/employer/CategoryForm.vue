@@ -1,12 +1,12 @@
 <template>
-  <div id="category-form" v-if="Offer.id != undefined">
+  <div id="category-form" v-if="Offer.id != undefined">    
     <form @submit.prevent="submitForm">
       <v-container>
         <v-layout>
           <v-flex xs12>
             <v-select
               v-model="selectedItems"
-              :items="categories"
+              :items="allCategories"
               attach
               chips
               label="Seleccione una categoría de su oferta"
@@ -36,10 +36,11 @@ export default {
     errorMessages:''
   }),
   created(){    
-    this.list();   
+    //this.list();   
+    this.all();    
   },
   methods:{
-    ...mapActions('CategoryStore', ['list']),
+    ...mapActions('CategoryStore', ['all']),
     ...mapActions('EmployerOfferStore', ['attachCategory']),
     submitForm(){
       this.errorMessages = '';
@@ -64,7 +65,7 @@ export default {
     }
   },  
   computed:{
-    ...mapState('CategoryStore', ['categories']),
+    ...mapState('CategoryStore', ['allCategories']),
     ...mapState('EmployerOfferStore', ['Offer', 'saved','step']),    
     hasErrorSelectedItems(){
       if(!this.selectedItems.length){
