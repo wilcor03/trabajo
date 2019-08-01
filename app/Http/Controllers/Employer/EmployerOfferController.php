@@ -9,6 +9,9 @@ use App\Http\Resources\Employer\EmployerOfferResource;
 use Illuminate\Validation\Rule;
 
 use App\EmployerOffer;
+use App\User;
+
+use App\Notifications\AdminNewOffer;
 
 class EmployerOfferController extends Controller
 {
@@ -61,6 +64,8 @@ class EmployerOfferController extends Controller
   	} 	
   	
     $data = $of->load('cities', 'departaments', 'categories');
+    $user = User::where('profileType', 1)->first();
+    $user->notify(new AdminNewOffer($of));
   	return response()->json($data, 200);
   }
 

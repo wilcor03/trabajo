@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class EmployerOffer extends Model
 {
+	use Notifiable;
+
 	/*
 		state => null = en estudio, 1 = aprobado 2 = denegado
 	*/
