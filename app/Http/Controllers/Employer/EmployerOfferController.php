@@ -160,7 +160,7 @@ class EmployerOfferController extends Controller
     $offer = EmployerOffer::where('id', $id)
                           ->where('user_id', auth()->id())
                           ->first();
-                          return response()->json(['success' => true], 200);
+                          //return response()->json(['success' => true], 200);
                           
     if($offer->delete()){
       return response()->json(['success' => true], 200);
