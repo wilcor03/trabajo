@@ -44,16 +44,42 @@
           <v-divider></v-divider>
 
           <v-card-title primary-title>
-          <div>
-            <div class="headline">Actualice su perfil</div>
-            <span class="grey--text">Complete y mantenga actualizado su perfil de trabajador, ésto nos ayudará a encontrar 
-              la mejor opción de trabajo para usted.
-            </span>
-          </div>
-        </v-card-title>
+            <div>
+              <div class="headline">Actualice su perfil</div>
+              <span class="grey--text">Complete y mantenga actualizado su perfil de trabajador, ésto nos ayudará a encontrar 
+                la mejor opción de trabajo para usted.
+              </span>
+            </div>
+          </v-card-title>         
 
           <v-card-text>
-            <v-layout sm6 v-if="selectedTab">    
+            <v-layout>
+              <v-flex>
+                <v-card              
+                  class="mx-auto"
+                >
+                  <v-card-title class="text-md-center">
+                    <span>Completado de perfil: &nbsp;</span>
+                    <span class="success--text" v-if="complete == 100"> 
+                      <strong><u>                        
+                        Gracias por completar su perfil!
+                        </u> <v-icon color="success" right>mdi-check</v-icon></strong>
+                    </span>
+                    <v-progress-linear
+                      v-model="complete"
+                      color="blue-grey"
+                      height="25"
+                      reactive
+                      :buffer-value="100"
+                    >
+                      <strong>{{ Math.ceil( (profileComplete) * 25 ) }}%</strong>
+                    </v-progress-linear>                      
+                  </v-card-title>                            
+                </v-card>
+              </v-flex>              
+            </v-layout>           
+            <v-layout sm6 v-if="selectedTab">              
+
               <v-stepper v-model="element" style="width:100%;">
                 <v-stepper-header>
                   <v-stepper-step :complete="hasProfile" editable step="1">Información general</v-stepper-step>
@@ -78,7 +104,8 @@
                   </v-stepper-content>    
 
                   <v-stepper-content step="2">  
-                    <template v-if="element == 2">         
+                    <!--<template v-if="element == 2">-->
+                    <template>
                       <preloader v-if="loadingCateg"/>              
                       <categories/>  
                       <div v-if="hasCategories" class="text-md-right text-xs-center">
@@ -90,20 +117,22 @@
                   </v-stepper-content>    
 
                   <v-stepper-content step="3">  
-                    <template v-if="element == 3">
+                    <!--<template v-if="element == 3">-->
+                    <template>
                       <preloader v-if="experienceLoading" />              
                       <experiences/> 
                       <br>    
                       <div v-if="hasExperiences" class="text-md-right text-xs-center">
                         <v-btn color="indigo" outline @click="$store.commit('GeneralStore/setSelectedStep', 4)">
                           Continuar <v-icon>arrow_forward</v-icon>
-                        </v-btn>           
+                        </v-btn>               
                       </div>         
                     </template>          
                   </v-stepper-content>  
 
                   <v-stepper-content step="4">   
-                    <template v-if="element == 4">         
+                    <!--<template v-if="element == 4">         -->
+                    <template>
                       <preloader v-if="studyLoading" />              
                       <studies/>              
                     </template>       
@@ -140,7 +169,8 @@ export default {
   },
   data () {
     return {
-      element: 1            
+      element: 1,
+      complete:0      
     }
   },
   computed:{  
@@ -194,6 +224,30 @@ export default {
     selectedTab(){
       this.element =  this.$store.state.GeneralStore.selectedStep
       return this.element
+    },
+    profileComplete(){
+      let complete = 0;
+      this.complete = 0;
+      if(this.hasProfile){
+        complete += 1;      
+        this.complete += 25;          
+      }
+
+      if(this.hasCategories){
+        complete+=1;
+        this.complete += 25;
+      }
+
+      if(this.hasExperiences){
+        complete+=1;
+        this.complete += 25;
+      }
+
+      if(this.hasStudies){
+        complete+=1;
+        this.complete += 25;
+      }
+      return complete;
     }
   },
   watch:{

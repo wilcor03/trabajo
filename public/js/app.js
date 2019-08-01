@@ -3819,6 +3819,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -3837,6 +3838,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       emailRules: [function (v) {
         return !!v || 'Campo requerido!';
+      }, function (v) {
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(v) || 'E-mail Inválido';
       }],
       passwordRules: [function (v) {
         return !!v || 'Campo requerido!';
@@ -4613,6 +4616,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  // COMPONENTS
 
 
@@ -4630,7 +4662,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      element: 1
+      element: 1,
+      complete: 0
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapGetters"])('ProfileStore', ['profileGet']), {
@@ -4689,6 +4722,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     selectedTab: function selectedTab() {
       this.element = this.$store.state.GeneralStore.selectedStep;
       return this.element;
+    },
+    profileComplete: function profileComplete() {
+      var complete = 0;
+      this.complete = 0;
+
+      if (this.hasProfile) {
+        complete += 1;
+        this.complete += 25;
+      }
+
+      if (this.hasCategories) {
+        complete += 1;
+        this.complete += 25;
+      }
+
+      if (this.hasExperiences) {
+        complete += 1;
+        this.complete += 25;
+      }
+
+      if (this.hasStudies) {
+        complete += 1;
+        this.complete += 25;
+      }
+
+      return complete;
     }
   }),
   watch: {
@@ -5852,7 +5911,6 @@ var _createNamespacedHelp = Object(vuex__WEBPACK_IMPORTED_MODULE_0__["createName
   }),
   created: function created() {
     this.list();
-    console.log('kkk');
   }
 });
 
@@ -38968,7 +39026,8 @@ var render = function() {
                                           attrs: {
                                             label: "E-mail",
                                             rules: _vm.emailRules,
-                                            required: ""
+                                            required: "",
+                                            type: "email"
                                           },
                                           model: {
                                             value: _vm.user.email,
@@ -40427,7 +40486,7 @@ var render = function() {
                           _vm._v(" "),
                           _c("span", { staticClass: "grey--text" }, [
                             _vm._v(
-                              "Complete y mantenga actualizado su perfil de trabajador, ésto nos ayudará a encontrar \n              la mejor opción de trabajo para usted.\n            "
+                              "Complete y mantenga actualizado su perfil de trabajador, ésto nos ayudará a encontrar \n                la mejor opción de trabajo para usted.\n              "
                             )
                           ])
                         ])
@@ -40436,6 +40495,99 @@ var render = function() {
                       _c(
                         "v-card-text",
                         [
+                          _c(
+                            "v-layout",
+                            [
+                              _c(
+                                "v-flex",
+                                [
+                                  _c(
+                                    "v-card",
+                                    { staticClass: "mx-auto" },
+                                    [
+                                      _c(
+                                        "v-card-title",
+                                        { staticClass: "text-md-center" },
+                                        [
+                                          _c("span", [
+                                            _vm._v("Completado de perfil:  ")
+                                          ]),
+                                          _vm._v(" "),
+                                          _vm.complete == 100
+                                            ? _c(
+                                                "span",
+                                                {
+                                                  staticClass: "success--text"
+                                                },
+                                                [
+                                                  _c(
+                                                    "strong",
+                                                    [
+                                                      _c("u", [
+                                                        _vm._v(
+                                                          "                        \n                        Gracias por completar su perfil!\n                        "
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "v-icon",
+                                                        {
+                                                          attrs: {
+                                                            color: "success",
+                                                            right: ""
+                                                          }
+                                                        },
+                                                        [_vm._v("mdi-check")]
+                                                      )
+                                                    ],
+                                                    1
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-progress-linear",
+                                            {
+                                              attrs: {
+                                                color: "blue-grey",
+                                                height: "25",
+                                                reactive: "",
+                                                "buffer-value": 100
+                                              },
+                                              model: {
+                                                value: _vm.complete,
+                                                callback: function($$v) {
+                                                  _vm.complete = $$v
+                                                },
+                                                expression: "complete"
+                                              }
+                                            },
+                                            [
+                                              _c("strong", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    Math.ceil(
+                                                      _vm.profileComplete * 25
+                                                    )
+                                                  ) + "%"
+                                                )
+                                              ])
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
                           _vm.selectedTab
                             ? _c(
                                 "v-layout",
@@ -40577,59 +40729,56 @@ var render = function() {
                                             "v-stepper-content",
                                             { attrs: { step: "2" } },
                                             [
-                                              _vm.element == 2
-                                                ? [
-                                                    _vm.loadingCateg
-                                                      ? _c("preloader")
-                                                      : _vm._e(),
-                                                    _vm._v(" "),
-                                                    _c("categories"),
-                                                    _vm._v(" "),
-                                                    _vm.hasCategories
-                                                      ? _c(
-                                                          "div",
+                                              [
+                                                _vm.loadingCateg
+                                                  ? _c("preloader")
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                _c("categories"),
+                                                _vm._v(" "),
+                                                _vm.hasCategories
+                                                  ? _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "text-md-right text-xs-center"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "v-btn",
                                                           {
-                                                            staticClass:
-                                                              "text-md-right text-xs-center"
+                                                            attrs: {
+                                                              color: "indigo",
+                                                              outline: ""
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.$store.commit(
+                                                                  "GeneralStore/setSelectedStep",
+                                                                  3
+                                                                )
+                                                              }
+                                                            }
                                                           },
                                                           [
-                                                            _c(
-                                                              "v-btn",
-                                                              {
-                                                                attrs: {
-                                                                  color:
-                                                                    "indigo",
-                                                                  outline: ""
-                                                                },
-                                                                on: {
-                                                                  click: function(
-                                                                    $event
-                                                                  ) {
-                                                                    return _vm.$store.commit(
-                                                                      "GeneralStore/setSelectedStep",
-                                                                      3
-                                                                    )
-                                                                  }
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "\n                          Continuar "
-                                                                ),
-                                                                _c("v-icon", [
-                                                                  _vm._v(
-                                                                    "arrow_forward"
-                                                                  )
-                                                                ])
-                                                              ],
-                                                              1
-                                                            )
+                                                            _vm._v(
+                                                              "\n                          Continuar "
+                                                            ),
+                                                            _c("v-icon", [
+                                                              _vm._v(
+                                                                "arrow_forward"
+                                                              )
+                                                            ])
                                                           ],
                                                           1
                                                         )
-                                                      : _vm._e()
-                                                  ]
-                                                : _vm._e()
+                                                      ],
+                                                      1
+                                                    )
+                                                  : _vm._e()
+                                              ]
                                             ],
                                             2
                                           ),
@@ -40638,61 +40787,58 @@ var render = function() {
                                             "v-stepper-content",
                                             { attrs: { step: "3" } },
                                             [
-                                              _vm.element == 3
-                                                ? [
-                                                    _vm.experienceLoading
-                                                      ? _c("preloader")
-                                                      : _vm._e(),
-                                                    _vm._v(" "),
-                                                    _c("experiences"),
-                                                    _vm._v(" "),
-                                                    _c("br"),
-                                                    _vm._v(" "),
-                                                    _vm.hasExperiences
-                                                      ? _c(
-                                                          "div",
+                                              [
+                                                _vm.experienceLoading
+                                                  ? _c("preloader")
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                _c("experiences"),
+                                                _vm._v(" "),
+                                                _c("br"),
+                                                _vm._v(" "),
+                                                _vm.hasExperiences
+                                                  ? _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "text-md-right text-xs-center"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "v-btn",
                                                           {
-                                                            staticClass:
-                                                              "text-md-right text-xs-center"
+                                                            attrs: {
+                                                              color: "indigo",
+                                                              outline: ""
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.$store.commit(
+                                                                  "GeneralStore/setSelectedStep",
+                                                                  4
+                                                                )
+                                                              }
+                                                            }
                                                           },
                                                           [
-                                                            _c(
-                                                              "v-btn",
-                                                              {
-                                                                attrs: {
-                                                                  color:
-                                                                    "indigo",
-                                                                  outline: ""
-                                                                },
-                                                                on: {
-                                                                  click: function(
-                                                                    $event
-                                                                  ) {
-                                                                    return _vm.$store.commit(
-                                                                      "GeneralStore/setSelectedStep",
-                                                                      4
-                                                                    )
-                                                                  }
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "\n                          Continuar "
-                                                                ),
-                                                                _c("v-icon", [
-                                                                  _vm._v(
-                                                                    "arrow_forward"
-                                                                  )
-                                                                ])
-                                                              ],
-                                                              1
-                                                            )
+                                                            _vm._v(
+                                                              "\n                          Continuar "
+                                                            ),
+                                                            _c("v-icon", [
+                                                              _vm._v(
+                                                                "arrow_forward"
+                                                              )
+                                                            ])
                                                           ],
                                                           1
                                                         )
-                                                      : _vm._e()
-                                                  ]
-                                                : _vm._e()
+                                                      ],
+                                                      1
+                                                    )
+                                                  : _vm._e()
+                                              ]
                                             ],
                                             2
                                           ),
@@ -40701,15 +40847,13 @@ var render = function() {
                                             "v-stepper-content",
                                             { attrs: { step: "4" } },
                                             [
-                                              _vm.element == 4
-                                                ? [
-                                                    _vm.studyLoading
-                                                      ? _c("preloader")
-                                                      : _vm._e(),
-                                                    _vm._v(" "),
-                                                    _c("studies")
-                                                  ]
-                                                : _vm._e()
+                                              [
+                                                _vm.studyLoading
+                                                  ? _c("preloader")
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                _c("studies")
+                                              ]
                                             ],
                                             2
                                           )

@@ -40,6 +40,7 @@ class PasswordResetSuccess extends Notification implements ShouldQueue
       $url = '/app/auth/login';
       return (new MailMessage)
           ->greeting('Hola! '.strtoupper($this->user->name))
+          ->subject('Cambio de Contraseña Exitoso! [Empleo - ConTabilizalo]')
           ->line('Ha cambiado su contraseña con exito!.')
           ->line('Ya puede ingresar con su nueva contraseña.')
           ->action('Ingresar', url($url));

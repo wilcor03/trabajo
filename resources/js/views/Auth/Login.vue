@@ -36,6 +36,7 @@
                   label="E-mail"
                   :rules="emailRules"                  
                   required
+                  type="email"
                 ></v-text-field>
 
                 <v-text-field
@@ -105,6 +106,7 @@ export default {
     },    
     emailRules: [
       v => !!v || 'Campo requerido!',
+      v => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(v) || 'E-mail Inválido'
     ],       
     passwordRules: [
       v => !!v || 'Campo requerido!',

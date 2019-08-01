@@ -48,8 +48,7 @@ class EmployeeStudyController extends Controller
 
   public function delete($item_id){  	
   	$user = auth()->user();
-  	$es = $user->studies()->where('id', $item_id)->first();
-    dd($es);
+  	$es = $user->studies()->where('id', $item_id)->first();    
   	if($es->delete()){
       return response()->json(true, 200);  
     }

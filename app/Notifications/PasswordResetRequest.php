@@ -43,7 +43,7 @@ class PasswordResetRequest extends Notification implements ShouldQueue
         //dd($url);
         return (new MailMessage)
             ->greeting('Hola! '.strtoupper($this->name))
-            ->subject('Cambio Contraseña [Empleo - ConTabilizalo]')
+            ->subject('Cambio de Contraseña [Empleo - ConTabilizalo]')
             ->line('Usted esta recibiendo este mensaje por que recibimos una solicitud para cambiar la contraseña de su cuenta.')
             ->action('Cambiar contraseña', url($url))
             ->line('Si usted no solicito el cambio de su contraseña, omita este correo por favor!.');

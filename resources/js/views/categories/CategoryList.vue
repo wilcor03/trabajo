@@ -46,8 +46,7 @@ export default {
         }
     },
     created(){        
-      this.list(); 
-      console.log('kkk')                           
+      this.list();                              
     }    
 }
 </script>
