@@ -20,7 +20,14 @@
             </v-btn>            
             <v-toolbar-title class="white--text">Datos de mi empresa</v-toolbar-title>
           </v-toolbar>
+          
           <v-card-text class="grey lighten-5">
+            <div class="my-2">
+              <v-btn small dark color="indigo" :to="{name:'employer.offers.add'}">
+                <v-icon left>add</v-icon>
+                Pubicar una oferta de trabajo
+              </v-btn>
+            </div>
             <v-list>
               <v-subheader>
                 <strong>Información general </strong>
@@ -38,7 +45,7 @@
 
               <v-divider inset></v-divider>
 
-              <v-list-tile>
+              <v-list-tile v-if="Profile.docType">
                 <v-list-tile-action>
                   <v-icon>mdi-file-document-box-outline</v-icon>
                 </v-list-tile-action>
@@ -104,7 +111,7 @@
 
               <v-divider inset></v-divider>
 
-              <v-list-tile>
+              <v-list-tile v-if="Profile.city">
                 <v-list-tile-action>
                   <v-icon color="yellow">location_on</v-icon>
                 </v-list-tile-action>

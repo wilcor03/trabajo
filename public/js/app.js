@@ -5804,6 +5804,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('EmployerProfileStore', ['Profile'])),
@@ -42666,6 +42673,34 @@ var render = function() {
                     { staticClass: "grey lighten-5" },
                     [
                       _c(
+                        "div",
+                        { staticClass: "my-2" },
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: {
+                                small: "",
+                                dark: "",
+                                color: "indigo",
+                                to: { name: "employer.offers.add" }
+                              }
+                            },
+                            [
+                              _c("v-icon", { attrs: { left: "" } }, [
+                                _vm._v("add")
+                              ]),
+                              _vm._v(
+                                "\n                Pubicar una oferta de trabajo\n              "
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
                         "v-list",
                         [
                           _c("v-subheader", [
@@ -42706,35 +42741,37 @@ var render = function() {
                           _vm._v(" "),
                           _c("v-divider", { attrs: { inset: "" } }),
                           _vm._v(" "),
-                          _c(
-                            "v-list-tile",
-                            [
-                              _c(
-                                "v-list-tile-action",
+                          _vm.Profile.docType
+                            ? _c(
+                                "v-list-tile",
                                 [
-                                  _c("v-icon", [
-                                    _vm._v("mdi-file-document-box-outline")
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-list-tile-content",
-                                [
-                                  _c("v-list-tile-title", [
-                                    _vm._v("Tipo de documento")
-                                  ]),
+                                  _c(
+                                    "v-list-tile-action",
+                                    [
+                                      _c("v-icon", [
+                                        _vm._v("mdi-file-document-box-outline")
+                                      ])
+                                    ],
+                                    1
+                                  ),
                                   _vm._v(" "),
-                                  _c("v-list-tile-sub-title", [
-                                    _vm._v(_vm._s(_vm.Profile.docType.name))
-                                  ])
+                                  _c(
+                                    "v-list-tile-content",
+                                    [
+                                      _c("v-list-tile-title", [
+                                        _vm._v("Tipo de documento")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("v-list-tile-sub-title", [
+                                        _vm._v(_vm._s(_vm.Profile.docType.name))
+                                      ])
+                                    ],
+                                    1
+                                  )
                                 ],
                                 1
                               )
-                            ],
-                            1
-                          ),
+                            : _vm._e(),
                           _vm._v(" "),
                           _c("v-divider", { attrs: { inset: "" } }),
                           _vm._v(" "),
@@ -42865,42 +42902,46 @@ var render = function() {
                           _vm._v(" "),
                           _c("v-divider", { attrs: { inset: "" } }),
                           _vm._v(" "),
-                          _c(
-                            "v-list-tile",
-                            [
-                              _c(
-                                "v-list-tile-action",
+                          _vm.Profile.city
+                            ? _c(
+                                "v-list-tile",
                                 [
-                                  _c("v-icon", { attrs: { color: "yellow" } }, [
-                                    _vm._v("location_on")
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-list-tile-content",
-                                [
-                                  _c("v-list-tile-title", [
-                                    _vm._v("Ciudad principal")
-                                  ]),
+                                  _c(
+                                    "v-list-tile-action",
+                                    [
+                                      _c(
+                                        "v-icon",
+                                        { attrs: { color: "yellow" } },
+                                        [_vm._v("location_on")]
+                                      )
+                                    ],
+                                    1
+                                  ),
                                   _vm._v(" "),
-                                  _c("v-list-tile-sub-title", [
-                                    _vm._v(
-                                      _vm._s(_vm.Profile.city.name) +
-                                        " (" +
-                                        _vm._s(
-                                          _vm.Profile.city.departament_name
-                                        ) +
-                                        ")"
-                                    )
-                                  ])
+                                  _c(
+                                    "v-list-tile-content",
+                                    [
+                                      _c("v-list-tile-title", [
+                                        _vm._v("Ciudad principal")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("v-list-tile-sub-title", [
+                                        _vm._v(
+                                          _vm._s(_vm.Profile.city.name) +
+                                            " (" +
+                                            _vm._s(
+                                              _vm.Profile.city.departament_name
+                                            ) +
+                                            ")"
+                                        )
+                                      ])
+                                    ],
+                                    1
+                                  )
                                 ],
                                 1
                               )
-                            ],
-                            1
-                          )
+                            : _vm._e()
                         ],
                         1
                       ),
