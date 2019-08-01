@@ -61,11 +61,12 @@ class EmployerOfferController extends Controller
       $of->fill($r->all());
       $of->user()->associate(auth()->user());
       $of->save();	
+
+      $user = User::where('profileType', 1)->first();
+      $user->notify(new AdminNewOffer($of));
   	} 	
   	
-    $data = $of->load('cities', 'departaments', 'categories');
-    $user = User::where('profileType', 1)->first();
-    $user->notify(new AdminNewOffer($of));
+    $data = $of->load('cities', 'departaments', 'categories');    
   	return response()->json($data, 200);
   }
 

@@ -4998,6 +4998,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -5072,6 +5073,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -41319,6 +41321,7 @@ var render = function() {
                             {
                               attrs: {
                                 disabled: _vm.globalLoading,
+                                loading: _vm.globalLoading,
                                 color: "primary",
                                 depressed: ""
                               },
@@ -41516,6 +41519,7 @@ var render = function() {
                             {
                               attrs: {
                                 disabled: _vm.globalLoading,
+                                loading: _vm.globalLoading,
                                 color: "primary",
                                 depressed: ""
                               },
@@ -90066,7 +90070,6 @@ var EmployerOfferStore = {
       });
       Object(_services_Employer_offer__WEBPACK_IMPORTED_MODULE_0__["destroy"])(id).then(function (res) {
         if (res.success == true) {
-          console.log('offers in delete', state.data);
           var data = state.data.data;
           var pos = data.findIndex(function (item) {
             return item.id == id;

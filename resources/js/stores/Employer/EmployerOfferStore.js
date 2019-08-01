@@ -163,7 +163,7 @@ const EmployerOfferStore = {
         deleteOffer({commit, state}, id){
             commit('setLoading', true, {root:true});
             destroy(id).then(res => {                
-                if(res.success == true){ console.log('offers in delete', state.data)
+                if(res.success == true){ 
                     const data = state.data.data;
                     const pos = data.findIndex(item => {
                         return item.id == id;

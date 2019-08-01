@@ -41,6 +41,7 @@
             <v-btn   
                 v-if="step != 3"     
                 :disabled="globalLoading"
+                :loading="globalLoading"
                 color="primary"
                 depressed
                 @click="submitInfo"
