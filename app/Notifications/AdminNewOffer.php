@@ -45,7 +45,7 @@ class AdminNewOffer extends Notification
      */
     public function toMail($notifiable)
     {   
-        return (new Mailable())                    
+        return (new MailMessage())                    
                     ->subject('Nueva oferta - [ Empleo - ConTabilizalo ]')
                     ->line('Nueva oferta: '.$this->offer->vacancyName)
                     ->line('Empresa: '.$this->offer->user->employerProfile->socialReason);

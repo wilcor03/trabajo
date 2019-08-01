@@ -26,7 +26,7 @@ class EmployerProfileController extends Controller
       'socialReason'=> 'required|string|max:100|min:3',
       'docType'     => 'required|numeric|max:9',
       'doc'         => 'required|numeric|digits_between:3,15',
-      'dv'          => 'required|numeric|digits_between:1,2',
+      'dv'          => 'nullable|numeric|digits_between:1,2',
       'phone'       => 'numeric|digits_between:7,10',
       'celphone'    => 'numeric|digits:10',
       'email'       => 'required|email',
