@@ -63,7 +63,7 @@ class EmployerOfferController extends Controller
       $of->save();	
 
       $user = User::where('profileType', 1)->first();
-      $user->notify(new AdminNewOffer($of));
+      //$user->notify(new AdminNewOffer($of));
   	} 	
   	
     $data = $of->load('cities', 'departaments', 'categories');    

@@ -8,6 +8,7 @@ Route::prefix('/app/{any?}')->group(function(){
 
 #### PUBLIC ROUTES ###################
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('publicar-ofertas-de-empleo', 'HomeController@wherePublicOffers');
 #### END PUBLIC ROUTES ###################
 Route::post('/register', 'Auth\RegisterController@register');
 

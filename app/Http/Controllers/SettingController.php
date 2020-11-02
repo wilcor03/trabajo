@@ -23,10 +23,10 @@ class SettingController extends Controller
       'content' => 'lo que sea'
     ];
 
-    Mail::send('emails.test', $data, function($m){
+    /*Mail::send('emails.test', $data, function($m){
       $m->to('wilcor03@gmail.com', 'wilmer C.')->subject('un asunto test');
     });
-    dd('llego');
+    dd('llego');*/
   }
 
   public function getCitiesWithDeps(){

@@ -24,8 +24,10 @@ import AuthLogin from './views/Auth/Login.vue'
 import AuthPreregister  from './views/Auth/Preregister.vue'
 import AuthRegister  from './views/Auth/Register.vue';
 import PreregisterAlreadyAuth  from './views/Auth/PreregisterAlreadyAuth.vue';
+import PreregisterEmployer  from './views/Auth/PreregisterEmployer.vue';
 import AuthLinkReset  from './views/Auth/LinkResetPassword.vue';
 import ResetPassword  from './views/Auth/ResetPassword.vue';
+
 
 
 
@@ -113,6 +115,10 @@ export const routes = [
                     {
                         path:'pre-register',
                         component:AuthPreregister  
+                    },
+                    {
+                        path:'pre-register-employer',
+                        component:PreregisterEmployer  
                     },
                     {
                         path:'pre-register-alrady-auth',

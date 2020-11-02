@@ -26,4 +26,8 @@ class HomeController extends Controller
         return redirect()->to('/app/auth/login');
         //return view('home');
     }
+
+    public function wherePublicOffers(){      
+      return view('public.where-public-offers');
+    }
 }

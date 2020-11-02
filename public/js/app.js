@@ -4083,6 +4083,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Auth/PreregisterEmployer.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Auth/PreregisterEmployer.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Auth/Register.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Auth/Register.vue?vue&type=script&lang=js& ***!
@@ -39707,6 +39731,63 @@ var render = function() {
             ],
             1
           )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Auth/PreregisterEmployer.vue?vue&type=template&id=2c356d8e&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Auth/PreregisterEmployer.vue?vue&type=template&id=2c356d8e& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "prereg-employer" } },
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c("v-flex", { attrs: { xs12: "", sm12: "", "offset-sm2": "" } }, [
+            _c("br"),
+            _vm._v(" "),
+            _c("h1", { staticClass: "red--text" }, [
+              _vm._v(
+                "Registrate como Empleador en el Portal de Empleo de ConTabilizalo.com"
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "p",
+              [
+                _c("v-icon", { attrs: { color: "success" } }, [
+                  _vm._v("mdi-check")
+                ]),
+                _vm._v(" kkkkkk")
+              ],
+              1
+            )
+          ])
         ],
         1
       )
@@ -88951,8 +89032,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_Auth_Preregister_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./views/Auth/Preregister.vue */ "./resources/js/views/Auth/Preregister.vue");
 /* harmony import */ var _views_Auth_Register_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./views/Auth/Register.vue */ "./resources/js/views/Auth/Register.vue");
 /* harmony import */ var _views_Auth_PreregisterAlreadyAuth_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./views/Auth/PreregisterAlreadyAuth.vue */ "./resources/js/views/Auth/PreregisterAlreadyAuth.vue");
-/* harmony import */ var _views_Auth_LinkResetPassword_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./views/Auth/LinkResetPassword.vue */ "./resources/js/views/Auth/LinkResetPassword.vue");
-/* harmony import */ var _views_Auth_ResetPassword_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./views/Auth/ResetPassword.vue */ "./resources/js/views/Auth/ResetPassword.vue");
+/* harmony import */ var _views_Auth_PreregisterEmployer_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./views/Auth/PreregisterEmployer.vue */ "./resources/js/views/Auth/PreregisterEmployer.vue");
+/* harmony import */ var _views_Auth_LinkResetPassword_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./views/Auth/LinkResetPassword.vue */ "./resources/js/views/Auth/LinkResetPassword.vue");
+/* harmony import */ var _views_Auth_ResetPassword_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./views/Auth/ResetPassword.vue */ "./resources/js/views/Auth/ResetPassword.vue");
 //ADMIN EMPLOYEER
 
  //ADMIN EMPLOYEER
@@ -88970,6 +89052,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // AUTH
+
 
 
 
@@ -89043,6 +89126,9 @@ var routes = [{
       path: 'pre-register',
       component: _views_Auth_Preregister_vue__WEBPACK_IMPORTED_MODULE_15__["default"]
     }, {
+      path: 'pre-register-employer',
+      component: _views_Auth_PreregisterEmployer_vue__WEBPACK_IMPORTED_MODULE_18__["default"]
+    }, {
       path: 'pre-register-alrady-auth',
       component: _views_Auth_PreregisterAlreadyAuth_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
       name: 'auth.preregister-a-auth',
@@ -89059,11 +89145,11 @@ var routes = [{
       name: 'auth.register'
     }, {
       path: 'link-reset-password',
-      component: _views_Auth_LinkResetPassword_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
+      component: _views_Auth_LinkResetPassword_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
       name: 'auth.link-reset-pass'
     }, {
       path: 'reset-password/:token',
-      component: _views_Auth_ResetPassword_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
+      component: _views_Auth_ResetPassword_vue__WEBPACK_IMPORTED_MODULE_20__["default"],
       name: 'auth.reset-pass'
     }]
   }]
@@ -91171,6 +91257,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PreregisterAlreadyAuth_vue_vue_type_template_id_3b7c7192___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PreregisterAlreadyAuth_vue_vue_type_template_id_3b7c7192___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/Auth/PreregisterEmployer.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/views/Auth/PreregisterEmployer.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PreregisterEmployer_vue_vue_type_template_id_2c356d8e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PreregisterEmployer.vue?vue&type=template&id=2c356d8e& */ "./resources/js/views/Auth/PreregisterEmployer.vue?vue&type=template&id=2c356d8e&");
+/* harmony import */ var _PreregisterEmployer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PreregisterEmployer.vue?vue&type=script&lang=js& */ "./resources/js/views/Auth/PreregisterEmployer.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PreregisterEmployer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PreregisterEmployer_vue_vue_type_template_id_2c356d8e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PreregisterEmployer_vue_vue_type_template_id_2c356d8e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/Auth/PreregisterEmployer.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/Auth/PreregisterEmployer.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/views/Auth/PreregisterEmployer.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreregisterEmployer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PreregisterEmployer.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Auth/PreregisterEmployer.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreregisterEmployer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/Auth/PreregisterEmployer.vue?vue&type=template&id=2c356d8e&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/views/Auth/PreregisterEmployer.vue?vue&type=template&id=2c356d8e& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PreregisterEmployer_vue_vue_type_template_id_2c356d8e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PreregisterEmployer.vue?vue&type=template&id=2c356d8e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Auth/PreregisterEmployer.vue?vue&type=template&id=2c356d8e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PreregisterEmployer_vue_vue_type_template_id_2c356d8e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PreregisterEmployer_vue_vue_type_template_id_2c356d8e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
